@@ -1,0 +1,33 @@
+/*
+ Localizable.strings
+ CITE
+ 
+ Created by Noah Kamara on 19.07.20.
+ 
+ */
+
+// Actions
+"addFolderAction" = "Add Folder";
+"addTagAction" = "Add Tag";
+
+"infosAction" = "Infos";
+"folderAction" = "Folder";
+"tagsAction" = "Tags";
+"shareAction" = "Share";
+"openInNewWindowAction" = "Open in new Window";
+"deleteAction" = "Delete";
+
+
+// Labels
+"documentsLabel" = "Documents";
+"recentLabel" = "Recent";
+"tagsLabel" = "Tags";
+"foldersLabel" = "Folders";
+"tagsLabel" = "Tags";
+"informationLabel" = "Information";
+
+"documentTypeLabel" = "Document Type";
+"doiLabel" = "DOI";
+"publishedLabel" = "Published";
+
+"defaultCollectionLabel" = "New Collection";

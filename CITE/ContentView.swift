@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
     var body: some View {
-        Text("Hello, world!").padding()
+        NavigationView {
+            Sidebar().environment(\.managedObjectContext, managedObjectContext)
+//            PrimaryView().environment(\.managedObjectContext, managedObjectContext)
+        }
     }
 }
 
