@@ -77,8 +77,10 @@ extension CollectionView{
                     
                     Button(action: {
                         print("deleteAction")
-                    }) { Label("deleteAction", systemImage: "trash") }
-                    .accentColor(.red)
+                    }) {
+                        Label("deleteAction", systemImage: "trash")
+                    }.accentColor(.red)
+                    
                 }
                 .popover(isPresented: self.$showPopover) {
                     if self.popoverViewType == .info {
@@ -100,6 +102,7 @@ extension CollectionView{
                     .padding(.bottom, 5)
                     
                 Text(self.ref.title ?? "No Title")
+                    .accentColor(.primary)
                     .lineLimit(1)
                 
                 HStack {

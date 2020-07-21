@@ -93,11 +93,13 @@ struct Sidebar: View {
                     }) {
                         Label("Add Mockup Data", systemImage: "exclamationmark.triangle.fill")
                     }
+                    
                     Button(action: {
                         self.addCollection(.folder)
                     }) {
                         Label("addFolderAction", systemImage: "folder")
                     }
+                    
                     Button(action: {
                         self.addCollection(.tag)
                     }) {
@@ -137,12 +139,22 @@ struct Sidebar: View {
         self.addCollection(.tag, "Pink Tag", .pink)
         self.addCollection(.tag, "Purple Tag", .purple)
         self.addCollection(.tag, "Yellow Tag", .yellow)
-        
+                
         for i in 0...10 {
             let item = CITE_Reference(context: self.managedObjectContext)
             item.id = UUID()
             item.title = "Item No. \(i)"
             
+            let urls = [
+                URL(string: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf")!,
+                URL(string: "http://www.africau.edu/images/default/sample.pdf")!,
+                URL(string: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf")!,
+                URL(string: "https://file-examples-com.github.io/uploads/2017/10/file-sample_150kB.pdf")!,
+                URL(string: "https://file-examples-com.github.io/uploads/2017/10/file-example_PDF_500_kB.pdf")!
+            ]
+            
+            let document = PDFDocument(url: urls.randomElement()!)
+            item.document = document?.dataRepresentation()
             do {
                 try self.managedObjectContext.save()
             } catch {

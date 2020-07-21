@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FDABD9C824C6D6C700739A7E /* PDFViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDABD9C724C6D6C700739A7E /* PDFViewContainer.swift */; };
 		FDBC3B3224C370A40003DEA3 /* CITE_Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC3B3124C370A40003DEA3 /* CITE_Collection.swift */; };
 		FDBC3B3624C3BE120003DEA3 /* CollectionDropDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC3B3524C3BE120003DEA3 /* CollectionDropDelegate.swift */; };
 		FDBC3B3A24C466590003DEA3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FDBC3B3C24C466590003DEA3 /* Localizable.strings */; };
-		FDBC3B3F24C486660003DEA3 /* CrossrefMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBC3B3E24C486660003DEA3 /* CrossrefMetaData.swift */; };
 		FDEDF9C524C35F0A007384F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEDF9C424C35F0A007384F8 /* AppDelegate.swift */; };
 		FDEDF9C724C35F0A007384F8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEDF9C624C35F0A007384F8 /* SceneDelegate.swift */; };
 		FDEDF9CA24C35F0A007384F8 /* CITE.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FDEDF9C824C35F0A007384F8 /* CITE.xcdatamodeld */; };
@@ -46,12 +46,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FDABD9C724C6D6C700739A7E /* PDFViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewContainer.swift; sourceTree = "<group>"; };
 		FDBC3B3124C370A40003DEA3 /* CITE_Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CITE_Collection.swift; sourceTree = "<group>"; };
 		FDBC3B3524C3BE120003DEA3 /* CollectionDropDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDropDelegate.swift; sourceTree = "<group>"; };
 		FDBC3B3724C465E10003DEA3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		FDBC3B3B24C466590003DEA3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FDBC3B3D24C4665C0003DEA3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		FDBC3B3E24C486660003DEA3 /* CrossrefMetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossrefMetaData.swift; sourceTree = "<group>"; };
 		FDEDF9C124C35F0A007384F8 /* CITE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CITE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDEDF9C424C35F0A007384F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDEDF9C624C35F0A007384F8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -148,8 +148,8 @@
 				FDEDF9C624C35F0A007384F8 /* SceneDelegate.swift */,
 				FDEDF9CB24C35F0A007384F8 /* ContentView.swift */,
 				FDEDF9FF24C35FD1007384F8 /* Sidebar.swift */,
+				FDABD9C724C6D6C700739A7E /* PDFViewContainer.swift */,
 				FDBC3B4024C486850003DEA3 /* CollectionView */,
-				FDBC3B3E24C486660003DEA3 /* CrossrefMetaData.swift */,
 				FDEDF9CD24C35F0C007384F8 /* Assets.xcassets */,
 				FDEDF9D224C35F0C007384F8 /* LaunchScreen.storyboard */,
 				FD216EA024C3705C00EA15E4 /* CoreData Models */,
@@ -326,8 +326,8 @@
 				FDEDF9C524C35F0A007384F8 /* AppDelegate.swift in Sources */,
 				FDEDFA0224C36035007384F8 /* CollectionView.swift in Sources */,
 				FDEDF9CC24C35F0A007384F8 /* ContentView.swift in Sources */,
+				FDABD9C824C6D6C700739A7E /* PDFViewContainer.swift in Sources */,
 				FDBC3B3624C3BE120003DEA3 /* CollectionDropDelegate.swift in Sources */,
-				FDBC3B3F24C486660003DEA3 /* CrossrefMetaData.swift in Sources */,
 				FDEDFA0024C35FD1007384F8 /* Sidebar.swift in Sources */,
 				FDBC3B3224C370A40003DEA3 /* CITE_Collection.swift in Sources */,
 				FDEDF9C724C35F0A007384F8 /* SceneDelegate.swift in Sources */,

@@ -40,7 +40,7 @@ extension CITE_Collection {
     
     static func getFolders() -> NSFetchRequest<CITE_Collection> {
         let request: NSFetchRequest<CITE_Collection> = CITE_Collection.fetchRequest() as! NSFetchRequest<CITE_Collection>
-        var predicate: NSPredicate = NSPredicate(format: "type == %@", "folder")
+        let predicate: NSPredicate = NSPredicate(format: "type == %@", "folder")
         request.predicate = predicate
         let sortDescriptor = NSSortDescriptor(key: "label", ascending: true)
         request.sortDescriptors = [sortDescriptor]
@@ -49,7 +49,7 @@ extension CITE_Collection {
     
     static func getTags() -> NSFetchRequest<CITE_Collection> {
         let request: NSFetchRequest<CITE_Collection> = CITE_Collection.fetchRequest() as! NSFetchRequest<CITE_Collection>
-        var predicate: NSPredicate = NSPredicate(format: "type == %@", "tag")
+        let predicate: NSPredicate = NSPredicate(format: "type == %@", "tag")
         request.predicate = predicate
         let sortDescriptor = NSSortDescriptor(key: "label", ascending: true)
         request.sortDescriptors = [sortDescriptor]

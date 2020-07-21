@@ -87,10 +87,16 @@ struct CollectionView: View {
         ScrollView {
             LazyVGrid(columns: gridLayout, alignment: .center, spacing: 20) {
                 ForEach(self.references.wrappedValue, id:\.self) { item in
-                    ItemView(ref: item, layout: self.$layout)
-                        .padding(.horizontal)
-                        .environment(\.managedObjectContext, managedObjectContext)
-                        .onDrag { NSItemProvider(object: item) }
+                    NavigationLink(destination:
+                        item.document != nil
+                        ? AnyView( PDFViewContainer(data: item.document!) )
+                        : AnyView( Text("No Document") )
+                    ) {
+                        ItemView(ref: item, layout: self.$layout)
+                            .padding(.horizontal)
+                            .environment(\.managedObjectContext, managedObjectContext)
+                            .onDrag { NSItemProvider(object: item) }
+                    }
                 }
             }
             .padding(.horizontal)
@@ -99,9 +105,15 @@ struct CollectionView: View {
     
     var listView: some View {
         List(self.references.wrappedValue, id:\.self) { item in
-            ItemView(ref: item, layout: self.$layout)
-                .environment(\.managedObjectContext, managedObjectContext)
-                .onDrag { NSItemProvider(object: item) }
+            NavigationLink(destination:
+                item.document != nil
+                ? AnyView( PDFViewContainer(data: item.document!) )
+                : AnyView( Text("No Document") )
+            ) {
+                ItemView(ref: item, layout: self.$layout)
+                    .environment(\.managedObjectContext, managedObjectContext)
+                    .onDrag { NSItemProvider(object: item) }
+            }
         }
     }
     

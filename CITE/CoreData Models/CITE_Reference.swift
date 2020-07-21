@@ -63,6 +63,7 @@ extension CITE_Reference {
 
     @NSManaged public var id: UUID?
     @NSManaged public var title: String?
+    @NSManaged public var document: Data?
     @NSManaged public var folder: CITE_Collection?
     @NSManaged public var tags: NSSet?
 
