@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
+import PDFKit
 
-extension CollectionView{
+extension CollectionView {
     
     struct ItemView: View {
         /// Managed Object Context
@@ -31,6 +32,7 @@ extension CollectionView{
         /// Determines the type of the popover
         @State var popoverViewType: MenuSelection = .info
         
+        
         enum MenuSelection {
             case info
             case folder
@@ -46,11 +48,27 @@ extension CollectionView{
         }
         
         var preview: some View {
-            Rectangle()
-                .foregroundColor(.secondary)
-                .opacity(0.7)
+            Group() {
+                if self.ref.thumbnail != nil {
+                    Image(uiImage: UIImage(data: self.ref.thumbnail!)!)
+                        .renderingMode(.original)
+                        .resizable()
+                        
+                } else {
+                    Rectangle()
+                        .foregroundColor(.secondary)
+                        .opacity(0.7)
+                }
+            }
                 .aspectRatio(1/sqrt(2), contentMode: .fit)
                 .clipped()
+                .cornerRadius(self.layout == .grid ? 15 : 5)
+                .overlay(
+                    RoundedRectangle(cornerRadius: self.layout == .grid ? 15 : 5)
+                        .stroke(lineWidth: 1)
+                        .foregroundColor(.secondary)
+                )
+            
                 .contextMenu {
                     Button(action: {
                         self.popoverViewType = .info
@@ -77,8 +95,10 @@ extension CollectionView{
                     
                     Button(action: {
                         print("deleteAction")
-                    }) { Label("deleteAction", systemImage: "trash") }
-                    .accentColor(.red)
+                    }) {
+                        Label("deleteAction", systemImage: "trash")
+                    }.accentColor(.red)
+                    
                 }
                 .popover(isPresented: self.$showPopover) {
                     if self.popoverViewType == .info {
@@ -100,6 +120,7 @@ extension CollectionView{
                     .padding(.bottom, 5)
                     
                 Text(self.ref.title ?? "No Title")
+                    .accentColor(.primary)
                     .lineLimit(1)
                 
                 HStack {

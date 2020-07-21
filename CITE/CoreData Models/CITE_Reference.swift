@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 import MobileCoreServices
+import PDFKit
 
 @objc(CITE_Reference)
 public class CITE_Reference: NSManagedObject, Identifiable, NSItemProviderWriting, NSItemProviderReading {
@@ -63,8 +64,38 @@ extension CITE_Reference {
 
     @NSManaged public var id: UUID?
     @NSManaged public var title: String?
+    @NSManaged public var document: Data?
+    @NSManaged public var thumbnail: Data?
     @NSManaged public var folder: CITE_Collection?
     @NSManaged public var tags: NSSet?
+    
+    public func generateThumbnail(_ completion: (Bool) -> Void) {
+        guard let data = self.document else {
+            self.thumbnail = nil
+            completion(false)
+            return
+        }
+        
+        guard let doc = PDFDocument(data: data) else {
+            debugPrint("NO DOC")
+            self.thumbnail = nil
+            completion(false)
+            return
+        }
+        
+        guard let page = doc.page(at: 0) else {
+            debugPrint("NO PAGE")
+            self.thumbnail = nil
+            completion(false)
+            return
+        }
+        
+        let uiImage = page.thumbnail(of: CGSize(width: 200, height: 200), for: .trimBox)
+        
+        self.thumbnail = uiImage.pngData()
+        completion(true)
+        
+    }
 
     func hasTag(_ tag: CITE_Collection) -> Bool {
         let tags: [CITE_Collection] = self.tags?.allObjects as! [CITE_Collection]

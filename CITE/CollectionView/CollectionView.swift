@@ -53,21 +53,16 @@ struct CollectionView: View {
                     Button(action: {
                         self.addReference()
                     }) {
-                        Image(systemName: "plus")
-                            .imageScale(.large)
-                            .padding()
+                        Label("Add Reference", systemImage: "plus")
+                            .labelStyle(IconOnlyLabelStyle())
                     }.hoverEffect(.highlight)
                     
                     Button(action: {
                         self.layout.toggle()
                     }) {
-                        Image(systemName: self.layout == .grid ? "square.grid.2x2" : "list.bullet")
-                            .imageScale(.large)
-                            .padding()
+                        Label("toggleLayoutLabel", systemImage: self.layout == .grid ? "square.grid.2x2" : "list.bullet")
+                            .labelStyle(IconOnlyLabelStyle())
                     }.hoverEffect(.highlight)
-                    
-                    Rectangle()
-                        .frame(width: 100)
                 }
             }
             //            ToolbarItem(placement: .principal) {
@@ -87,10 +82,16 @@ struct CollectionView: View {
         ScrollView {
             LazyVGrid(columns: gridLayout, alignment: .center, spacing: 20) {
                 ForEach(self.references.wrappedValue, id:\.self) { item in
-                    ItemView(ref: item, layout: self.$layout)
-                        .padding(.horizontal)
-                        .environment(\.managedObjectContext, managedObjectContext)
-                        .onDrag { NSItemProvider(object: item) }
+                    NavigationLink(destination:
+                        item.document != nil
+                        ? AnyView( PDFViewContainer(data: item.document!) )
+                        : AnyView( Text("No Document") )
+                    ) {
+                        ItemView(ref: item, layout: self.$layout)
+                            .padding(.horizontal)
+                            .environment(\.managedObjectContext, managedObjectContext)
+                            .onDrag { NSItemProvider(object: item) }
+                    }
                 }
             }
             .padding(.horizontal)
@@ -99,9 +100,15 @@ struct CollectionView: View {
     
     var listView: some View {
         List(self.references.wrappedValue, id:\.self) { item in
-            ItemView(ref: item, layout: self.$layout)
-                .environment(\.managedObjectContext, managedObjectContext)
-                .onDrag { NSItemProvider(object: item) }
+            NavigationLink(destination:
+                item.document != nil
+                ? AnyView( PDFViewContainer(data: item.document!) )
+                : AnyView( Text("No Document") )
+            ) {
+                ItemView(ref: item, layout: self.$layout)
+                    .environment(\.managedObjectContext, managedObjectContext)
+                    .onDrag { NSItemProvider(object: item) }
+            }
         }
     }
     

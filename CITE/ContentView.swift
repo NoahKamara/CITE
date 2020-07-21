@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
+import PDFKit
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
+    let url = URL(string: "https://pdftron.s3.amazonaws.com/downloads/pl/PDFTRON_mobile_about.pdf")!
     var body: some View {
         NavigationView {
             Sidebar().environment(\.managedObjectContext, managedObjectContext)
+//            PDFViewContainer(data: PDFDocument(url: self.url)!.dataRepresentation()!)
+
 //            PrimaryView().environment(\.managedObjectContext, managedObjectContext)
         }
     }

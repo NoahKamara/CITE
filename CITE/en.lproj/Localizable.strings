@@ -31,3 +31,5 @@
 "publishedLabel" = "Published";
 
 "defaultCollectionLabel" = "New Collection";
+
+"toggleLayoutLabel" = "Toggle Layout";

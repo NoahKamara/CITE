@@ -9,13 +9,15 @@
         <relationship name="tagItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CITE_Reference" inverseName="tags" inverseEntity="CITE_Reference"/>
     </entity>
     <entity name="CITE_Reference" representedClassName="CITE_Reference" syncable="YES">
+        <attribute name="document" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="thumbnail" optional="YES" attributeType="Binary"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="folder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CITE_Collection" inverseName="folderItems" inverseEntity="CITE_Collection"/>
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CITE_Collection" inverseName="tagItems" inverseEntity="CITE_Collection"/>
     </entity>
     <elements>
         <element name="CITE_Collection" positionX="-9" positionY="36" width="128" height="133"/>
-        <element name="CITE_Reference" positionX="-9" positionY="36" width="128" height="103"/>
+        <element name="CITE_Reference" positionX="-9" positionY="36" width="128" height="133"/>
     </elements>
 </model>
