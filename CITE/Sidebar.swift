@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MobileCoreServices
+import PDFKit
 
 struct Sidebar: View {
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -155,10 +156,12 @@ struct Sidebar: View {
             
             let document = PDFDocument(url: urls.randomElement()!)
             item.document = document?.dataRepresentation()
-            do {
-                try self.managedObjectContext.save()
-            } catch {
-                print(error)
+            item.generateThumbnail() {_ in 
+                do {
+                    try self.managedObjectContext.save()
+                } catch {
+                    print(error)
+                }
             }
         }
     }

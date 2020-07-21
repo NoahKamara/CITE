@@ -53,21 +53,16 @@ struct CollectionView: View {
                     Button(action: {
                         self.addReference()
                     }) {
-                        Image(systemName: "plus")
-                            .imageScale(.large)
-                            .padding()
+                        Label("Add Reference", systemImage: "plus")
+                            .labelStyle(IconOnlyLabelStyle())
                     }.hoverEffect(.highlight)
                     
                     Button(action: {
                         self.layout.toggle()
                     }) {
-                        Image(systemName: self.layout == .grid ? "square.grid.2x2" : "list.bullet")
-                            .imageScale(.large)
-                            .padding()
+                        Label("toggleLayoutLabel", systemImage: self.layout == .grid ? "square.grid.2x2" : "list.bullet")
+                            .labelStyle(IconOnlyLabelStyle())
                     }.hoverEffect(.highlight)
-                    
-                    Rectangle()
-                        .frame(width: 100)
                 }
             }
             //            ToolbarItem(placement: .principal) {
