@@ -14,9 +14,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             Sidebar().environment(\.managedObjectContext, managedObjectContext)
-//            PDFViewContainer(data: PDFDocument(url: self.url)!.dataRepresentation()!)
-
-//            PrimaryView().environment(\.managedObjectContext, managedObjectContext)
+            CollectionView(.all).environment(\.managedObjectContext, managedObjectContext)
         }
     }
 }

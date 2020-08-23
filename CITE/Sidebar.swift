@@ -36,7 +36,7 @@ struct Sidebar: View {
             }.listItemTint(.primary)
 
 //            NavigationLink(destination:
-//                CollectionView(.all).environment(\.managedObjectContext, managedObjectContext)
+//                CollectionView(.authors).environment(\.managedObjectContext, managedObjectContext)
 //            ) {
 //                Label("Authors", systemImage: "person.2")
 //            }.listItemTint(.primary)
@@ -59,7 +59,21 @@ struct Sidebar: View {
                 ForEach(self.folders, id:\.self) { item in
                     NavigationLink(destination: CollectionView(.folder, item).environment(\.managedObjectContext, managedObjectContext)) {
                         Label(item.label ?? "No Label", systemImage: "folder")
+                            .contextMenu {
+                                Button(action: {
+                                    self.addCollection(.folder)
+                                }) {
+                                    Label("editAction", systemImage: "pencil")
+                                }
+                                
+                                Button(action: {
+                                }) {
+                                    Label("deleteAction", systemImage: "trash")
+                                }
+                                EditButton()
+                            }
                     }.listItemTint(.primary)
+                    
                 }
             }
             
@@ -86,9 +100,7 @@ struct Sidebar: View {
             }
         )
         .navigationBarItems(trailing:
-            Image(systemName: "ellipsis.circle.fill")
-                .imageScale(.large)
-                .contextMenu {
+                Menu {
                     Button(action: {
                         self.addMockupData()
                     }) {
@@ -106,7 +118,14 @@ struct Sidebar: View {
                     }) {
                         Label("addTagAction", systemImage: "tag")
                     }
-                    EditButton()
+                    Button(action: {
+                        
+                    }) {
+                        Label("editAction", systemImage: "pen")
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                        .imageScale(.large)
                 }
                 .popover(
                     isPresented: self.$showAddCollectionModal,

@@ -11,8 +11,7 @@ import PDFKit
 
 struct PDFViewContainer: View {
     @State var pdfView: PDFView = PDFView()
-    
-    var data: Data
+    @State var data: Data
     
     var body: some View {
         HStack(spacing: 0) {
@@ -21,13 +20,17 @@ struct PDFViewContainer: View {
         }
 //        .toolbar {
 //            ToolbarItem(placement: .automatic) {
-//                HStack {
-//                    Button(action: {
-//                    }) {
-//                        Image(systemName: "circle.fill")
-//                            .imageScale(.large)
-//                            .padding()
-//                    }.hoverEffect(.highlight)
+//                Menu {
+//                    HStack {
+//                        Button(action: {
+//                        }) {
+//                            Image(systemName: "circle.fill")
+//                                .imageScale(.large)
+//                                .padding()
+//                        }.hoverEffect(.highlight)
+//                    }
+//                } label: {
+//                    Image(systemName: "ellipsis.circle").imageScale(.large)
 //                }
 //            }
 //        }

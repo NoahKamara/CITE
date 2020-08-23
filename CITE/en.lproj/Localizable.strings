@@ -15,8 +15,21 @@
 "tagsAction" = "Tags";
 "shareAction" = "Share";
 "openInNewWindowAction" = "Open in new Window";
+"editAction" = "Edit";
 "deleteAction" = "Delete";
 
+
+"symbolsLayoutAction" = "Symbols";
+"listLayoutAction" = "List";
+"toggleLayoutAction" = "List";
+
+"titleSortAction" = "Title";
+"pubdateSortAction" = "Publish Date";
+"authorSortAction" = "Author";
+"tagSortAction" = "Tag";
+
+"dismissDetailViewAction" = "Dismiss Detail View";
+"importAction" = "import";
 
 // Labels
 "documentsLabel" = "Documents";
@@ -32,4 +45,4 @@
 
 "defaultCollectionLabel" = "New Collection";
 
-"toggleLayoutLabel" = "Toggle Layout";
+

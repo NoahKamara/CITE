@@ -10,6 +10,8 @@ import Foundation
 enum CollectionType: String {
     case all = "all"
     case recent = "recent"
+    case authors = "authors"
+    
     case folder = "folder"
     case tag = "tag"
 }

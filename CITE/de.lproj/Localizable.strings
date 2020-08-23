@@ -15,8 +15,20 @@
 "tagsAction" = "Tags";
 "shareAction" = "Share";
 "openInNewWindowAction" = "Open in new Window";
+"editAction" = "Edit";
 "deleteAction" = "Delete";
 
+
+"symbolsLayoutAction" = "Symbols";
+"listLayoutAction" = "List";
+"toggleLayoutAction" = "List";
+
+"titleSortAction" = "Title";
+"pubdateSortAction" = "Publish Date";
+"authorSortAction" = "Author";
+"tagSortAction" = "Tag";
+
+"dismissDetailViewAction" = "Dismiss Detail View";
 
 // Labels
 "documentsLabel" = "Documents";
@@ -24,5 +36,12 @@
 "tagsLabel" = "Tags";
 "foldersLabel" = "Folders";
 "tagsLabel" = "Tags";
+"informationLabel" = "Information";
+
+"documentTypeLabel" = "Document Type";
+"doiLabel" = "DOI";
+"publishedLabel" = "Published";
 
 "defaultCollectionLabel" = "New Collection";
+
+

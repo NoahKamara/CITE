@@ -31,13 +31,41 @@ struct CollectionView: View {
     /// References of for collection
     var references: FetchRequest<CITE_Reference>
     
+    @State var test: Bool? = nil
+    
+    @State var showDocumentView: Bool = false
+    @State var showDocumentDetail: Bool = false
+    @State var selectedReference: CITE_Reference? = nil
+    @State var selectedId: UUID? = nil
+    
     @State var layout: CollectionLayout = .grid
     @State var searchString: String = ""
     @State var collectionItems = []
     
     
-    
     private let gridLayout = [ GridItem(.adaptive(minimum: 140)) ]
+    
+    func showDocumentView(_ doc: CITE_Reference) {
+        DispatchQueue.main.async {
+            self.selectedReference = doc
+            self.showDocumentView.toggle()
+        }
+    }
+    
+    func showDocumentDetail(_ doc: CITE_Reference) {
+        DispatchQueue.main.async {
+            self.selectedReference = doc
+            self.showDocumentDetail.toggle()
+        }
+    }
+    
+    func makeIsPresented(item: CITE_Reference) -> Binding<Bool> {
+        return .init(get: {
+            return self.selectedId == item.id
+        }, set: { _ in
+            self.selectedId = nil
+        })
+    }
     
     var body: some View {
         Group() {
@@ -47,27 +75,82 @@ struct CollectionView: View {
                 self.listView
             }
         }
+        .fullScreenCover(isPresented: self.$showDocumentView) {
+            ReferenceDetailView(ref: self.$selectedReference)
+        }
         .toolbar {
             ToolbarItem(placement: .automatic) {
-                HStack {
-                    Button(action: {
-                        self.addReference()
-                    }) {
-                        Label("Add Reference", systemImage: "plus")
-                            .labelStyle(IconOnlyLabelStyle())
-                    }.hoverEffect(.highlight)
+                Label("importAction", systemImage: "plus")
+            }
+            ToolbarItem(placement: .automatic) {
+                Menu {
+                    Section() {
+                        Button(action: {
+                            self.addReference()
+                        }) {
+                            Label("Add Reference", systemImage: "plus")
+                        }.hoverEffect(.highlight)
+                    }
                     
-                    Button(action: {
-                        self.layout.toggle()
-                    }) {
-                        Label("toggleLayoutLabel", systemImage: self.layout == .grid ? "square.grid.2x2" : "list.bullet")
-                            .labelStyle(IconOnlyLabelStyle())
-                    }.hoverEffect(.highlight)
+                    Section() {
+                        Button(action: {
+                            self.layout.toggle()
+                        }) {
+                            Label("toggleLayoutAction", systemImage: self.layout == .grid ? "square.grid.2x2" : "list.bullet")
+                        }.hoverEffect(.highlight)
+                        Button(action: {
+                            self.layout.toggle()
+                        }) {
+                            Label("symbolsLayoutAction", systemImage: "square.grid.2x2")
+                        }.hoverEffect(.highlight)
+                        
+                        Button(action: {
+                            self.layout.toggle()
+                        }) {
+                            Label("listLayoutAction", systemImage: "list.bullet")
+                        }.hoverEffect(.highlight)
+                    }
+                    
+                    Section() {
+                        Button(action: {
+                            self.layout.toggle()
+                        }) {
+                            Label("symbolsLayoutAction", systemImage: "list.bullet")
+                        }.hoverEffect(.highlight)
+                        
+                        Button(action: {
+                            self.layout.toggle()
+                        }) {
+                            Label("listLayoutAction", systemImage: "list.bullet")
+                        }.hoverEffect(.highlight)
+                    }
+                    
+                    Section() {
+                        Button(action: {
+                        }) {
+                            Text("titleSortAction")
+                        }.hoverEffect(.highlight)
+                        
+                        Button(action: {
+                        }) {
+                            Text("pubdateSortAction")
+                        }.hoverEffect(.highlight)
+                        
+                        Button(action: {
+                        }) {
+                            Text("authorSortAction")
+                        }.hoverEffect(.highlight)
+                        
+                        Button(action: {
+                        }) {
+                            Text("tagSortAction")
+                        }.hoverEffect(.highlight)
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                        .imageScale(.large)
                 }
             }
-            //            ToolbarItem(placement: .principal) {
-            //                SearchBar(text: self.$searchString)
-            //            }
         }
         
         .navigationBarTitle(
@@ -82,16 +165,13 @@ struct CollectionView: View {
         ScrollView {
             LazyVGrid(columns: gridLayout, alignment: .center, spacing: 20) {
                 ForEach(self.references.wrappedValue, id:\.self) { item in
-                    NavigationLink(destination:
-                        item.document != nil
-                        ? AnyView( PDFViewContainer(data: item.document!) )
-                        : AnyView( Text("No Document") )
-                    ) {
-                        ItemView(ref: item, layout: self.$layout)
-                            .padding(.horizontal)
-                            .environment(\.managedObjectContext, managedObjectContext)
-                            .onDrag { NSItemProvider(object: item) }
-                    }
+                    ItemView(ref: item, layout: self.$layout)
+                        .padding(.horizontal)
+                        .environment(\.managedObjectContext, managedObjectContext)
+                        .onDrag { NSItemProvider(object: item) }
+                        .onTapGesture {
+                            self.showDocumentView(item)
+                        }
                 }
             }
             .padding(.horizontal)
@@ -100,15 +180,12 @@ struct CollectionView: View {
     
     var listView: some View {
         List(self.references.wrappedValue, id:\.self) { item in
-            NavigationLink(destination:
-                item.document != nil
-                ? AnyView( PDFViewContainer(data: item.document!) )
-                : AnyView( Text("No Document") )
-            ) {
-                ItemView(ref: item, layout: self.$layout)
-                    .environment(\.managedObjectContext, managedObjectContext)
-                    .onDrag { NSItemProvider(object: item) }
-            }
+            ItemView(ref: item, layout: self.$layout)
+                .environment(\.managedObjectContext, managedObjectContext)
+                .onDrag { NSItemProvider(object: item) }
+                .onTapGesture {
+                    self.showDocumentView(item)
+                }
         }
     }
     
